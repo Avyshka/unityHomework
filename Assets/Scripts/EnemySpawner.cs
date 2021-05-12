@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private MoveTo _enemyPrefab;
     [SerializeField] private GameObject _player;
     [SerializeField] private float _countEnemyTotal = 10;
     [SerializeField] private float _spawnTimeout = 5;
@@ -13,8 +13,8 @@ public class EnemySpawner : MonoBehaviour
     {
         if (_time <= 0)
         {
-            Instantiate(_enemyPrefab, transform.position, transform.rotation)
-                .GetComponent<MoveTo>().setPlayer(_player);
+            var enemyInstance = Instantiate(_enemyPrefab, transform.position, transform.rotation);
+            enemyInstance.SetPlayer(_player);
 
             _time = _spawnTimeout;
             _countEnemyTotal--;

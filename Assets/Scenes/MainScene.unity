@@ -1888,7 +1888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda4a7ac706bd475ba22a9eba78666ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 3591889244815329011, guid: 6ec104d6aa7ba4937a542ea544d3a1f6, type: 3}
+  _enemyPrefab: {fileID: 6851008936650771635, guid: 6ec104d6aa7ba4937a542ea544d3a1f6, type: 3}
   _player: {fileID: 1292067378}
   _countEnemyTotal: 10
   _spawnTimeout: 5

@@ -16,7 +16,7 @@ public class Mine : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }

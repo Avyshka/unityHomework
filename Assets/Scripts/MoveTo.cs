@@ -4,49 +4,49 @@ using UnityEngine.AI;
 public class MoveTo : MonoBehaviour
 {
     [SerializeField] private double _range = 10;
-    [SerializeField] public GameObject _player;
+    [SerializeField] private GameObject _player;
 
-    private NavMeshAgent agent;
+    private NavMeshAgent _agent;
 
     private double _distance;
 
-    private float minRange = -10.0f;
-    private float maxRange = 10.0f;
+    private readonly float _minRange = -10.0f;
+    private readonly float _maxRange = 10.0f;
 
-    private Vector3 randomPosition = new Vector3();
+    private Vector3 _randomPosition = new Vector3();
 
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
-        if (agent && _player)
+        if (_agent && _player)
         {
             _distance = Vector3.Distance(transform.position, _player.transform.position);
             if (_distance < _range)
             {
-                agent.speed = 3.5f;
-                agent.SetDestination(_player.transform.position);
+                _agent.speed = 3.5f;
+                _agent.SetDestination(_player.transform.position);
             }
             else
             {
-                if (agent.remainingDistance <= agent.stoppingDistance)
+                if (_agent.remainingDistance <= _agent.stoppingDistance)
                 {
-                    agent.speed = 1.5f;
-                    randomPosition.Set(
-                        agent.destination.x + Random.Range(minRange, maxRange),
-                        agent.destination.y + Random.Range(minRange, maxRange),
-                        agent.destination.z + Random.Range(minRange, maxRange)
+                    _agent.speed = 1.5f;
+                    _randomPosition.Set(
+                        _agent.destination.x + Random.Range(_minRange, _maxRange),
+                        _agent.destination.y + Random.Range(_minRange, _maxRange),
+                        _agent.destination.z + Random.Range(_minRange, _maxRange)
                     );
-                    agent.SetDestination(randomPosition);
+                    _agent.SetDestination(_randomPosition);
                 }
             }
         }
     }
 
-    public void setPlayer(GameObject player)
+    public void SetPlayer(GameObject player)
     {
         _player = player;
     }

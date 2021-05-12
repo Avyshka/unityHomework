@@ -11,14 +11,12 @@ public class Turret : MonoBehaviour
     [SerializeField] private float _reloadTimeout = 1.0f;
     private float _currentTime = 0;
 
-    private float _distance;
-
     private void Update()
     {
         if (_player)
         {
-            _distance = Vector3.Distance(transform.position, _player.transform.position);
-            if (_distance < _range)
+            var distance = Vector3.Distance(transform.position, _player.transform.position);
+            if (distance < _range)
             {
                 _top.transform.LookAt(_player.transform);
                 

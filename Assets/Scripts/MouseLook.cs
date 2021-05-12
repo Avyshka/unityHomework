@@ -20,7 +20,7 @@ public class MouseLook : MonoBehaviour
 
     private Vector3 _rotate = new Vector3();
 
-    void Start()
+    private void Awake()
     {
         Rigidbody body = GetComponent<Rigidbody>();
         if (body != null) {
@@ -28,7 +28,7 @@ public class MouseLook : MonoBehaviour
         }
     }
 
-	void Update () 
+	private void Update () 
     {
         if (_axes == RotationAxes.MouseX)
         {
