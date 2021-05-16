@@ -3,10 +3,17 @@
 public class PlayerMovement : MonoBehaviour 
 {
     [SerializeField] private float _speed = 6.0f;
+    [SerializeField] private float _jumpForce = 100.0f;
 
     private Vector3 _movement = new Vector3();
+    private Rigidbody _rigidbody;
 
-	void Update () 
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Update () 
     {
         float deltaX = Input.GetAxis("Horizontal") * _speed;
         float deltaZ = Input.GetAxis("Vertical") * _speed;
@@ -16,14 +23,20 @@ public class PlayerMovement : MonoBehaviour
         _movement *= Time.deltaTime;
         transform.Translate(_movement);
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
     }
 
-    void Jump()
+    private void Jump()
     {
-
+        //if (_rigidbody.IsSleeping()) { 
+        //    _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Force);
+        //}
+        if (_rigidbody.velocity.y == 0)
+        {
+            _rigidbody.velocity = Vector3.up * _jumpForce * Time.deltaTime;
+        }
     }
 }
