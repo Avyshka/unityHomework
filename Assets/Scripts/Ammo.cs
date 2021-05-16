@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
+    [SerializeField] private int _countAmmo = 10;
     private void OnTriggerEnter(Collider other)
     {
         var inventory = other.GetComponent<Inventory>();
         if (inventory != null)
         {
-            //inventory.Hurt(_damage);
+            inventory.addAmmoMines(_countAmmo);
             Destroy(gameObject);
         }
     }
