@@ -1,12 +1,16 @@
 using UnityEngine;
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int _ammoMines = 0;
+    [SerializeField] private TMP_Text _labelAmmoMines;
 
-    public bool isEnoughAmmoMines()
+    public bool IsEnoughAmmoMines => _ammoMines > 0;
+
+    private void Start()
     {
-        return _ammoMines > 0;
+        UpdateAmmoInfo();
     }
 
     public void removeAmmoMines()
@@ -14,13 +18,18 @@ public class Inventory : MonoBehaviour
         if (_ammoMines > 0)
         {
             _ammoMines--;
-            Debug.Log("Ammo mines: " + _ammoMines);
+            UpdateAmmoInfo();
         }
     }
 
     public void addAmmoMines(int count)
     {
         _ammoMines += count;
-        Debug.Log("Ammo mines: " + _ammoMines);
+        UpdateAmmoInfo();
+    }
+
+    private void UpdateAmmoInfo()
+    {
+        _labelAmmoMines.text = "Mines: " + _ammoMines;
     }
 }

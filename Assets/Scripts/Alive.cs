@@ -2,12 +2,24 @@ using UnityEngine;
 
 public class Alive : MonoBehaviour
 {
-    [SerializeField] private int _health;
+    [SerializeField] private Bar _hpBar;
+    [SerializeField] private float _healthTotal;
+    private float _health;
 
-    public void Hurt(int damage)
+    private void Start()
+    {
+        _health = _healthTotal;
+    }
+
+    public void Hurt(float damage)
     {
         _health -= damage;
 
+        if (_hpBar)
+        {
+            float percent = _health / _healthTotal;
+            _hpBar.UpdateValue(percent);
+        }
         if (_health <= 0)
         {
             Die();

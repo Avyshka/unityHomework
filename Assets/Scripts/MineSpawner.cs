@@ -7,8 +7,8 @@ public class MineSpawner : MonoBehaviour
     [SerializeField] private Transform _mineSpawnPlace;
     [SerializeField] private Animator _animator;
 
+    private GameSettings _gameSettings = GameSettings.getInstance();
     private Inventory _inventory;
-
     private bool _isReloaded;
 
     private void Awake()
@@ -19,9 +19,13 @@ public class MineSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (_gameSettings.paused)
+        {
+            return;
+        }
         if (Input.GetButtonDown("Fire1"))
         {
-            if (_inventory.isEnoughAmmoMines() && _isReloaded)
+            if (_inventory.IsEnoughAmmoMines && _isReloaded)
             {
                 _inventory.removeAmmoMines();
                 Instantiate(_minePrefab, _mineSpawnPlace.position, _mineSpawnPlace.rotation);
