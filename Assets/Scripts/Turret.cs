@@ -10,6 +10,12 @@ public class Turret : MonoBehaviour
     [SerializeField] private GameObject _bullet;
     [SerializeField] private float _reloadTimeout = 1.0f;
     private float _currentTime = 0;
+    private AudioSource _audioSource;
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -24,6 +30,7 @@ public class Turret : MonoBehaviour
                 {
                     _currentTime = _reloadTimeout;
                     Instantiate(_bullet, _spawnPoint.transform.position, _spawnPoint.transform.rotation);
+                    _audioSource.Play();
                 }
                 else
                 {

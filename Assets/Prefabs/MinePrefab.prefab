@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 2
   _speed: 20
-  isPlayer: 0
+  _explosionPrefab: {fileID: 2982581898364824443, guid: 535d16caff88b4642a7bc4e95f8e3dbb, type: 3}
 --- !u!65 &8365096462685574670
 BoxCollider:
   m_ObjectHideFlags: 0

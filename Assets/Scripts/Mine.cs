@@ -4,6 +4,7 @@ public class Mine : MonoBehaviour
 {
     [SerializeField] private int _damage;
     [SerializeField] private float _speed = 10;
+    [SerializeField] private ParticleSystem _explosionPrefab;
     private Rigidbody _rigidbody;
 
     private void OnTriggerEnter(Collider other)
@@ -13,6 +14,8 @@ public class Mine : MonoBehaviour
         {
             enemy.Hurt(_damage);
             Destroy(gameObject);
+            var explosion =  Instantiate(_explosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
+            explosion.Play();
         }
     }
 
