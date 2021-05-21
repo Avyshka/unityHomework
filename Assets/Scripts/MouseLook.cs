@@ -17,19 +17,24 @@ public class MouseLook : MonoBehaviour
     [SerializeField] private float _maximumVert = 45.0f;
 
     private float _rotationX = 0;
-
     private Vector3 _rotate = new Vector3();
+    private GameSettings _gameSettings = GameSettings.getInstance();
 
     private void Awake()
     {
         Rigidbody body = GetComponent<Rigidbody>();
-        if (body != null) {
+        if (body != null)
+        {
             body.freezeRotation = true;
         }
     }
 
-	private void Update () 
+    private void Update()
     {
+        if (_gameSettings.paused)
+        {
+            return;
+        }
         if (_axes == RotationAxes.MouseX)
         {
             transform.Rotate(0, Input.GetAxis("Mouse X") * _sensitivityHor, 0);
@@ -53,5 +58,5 @@ public class MouseLook : MonoBehaviour
             _rotate.Set(_rotationX, rotationY, 0);
             transform.localEulerAngles = _rotate;
         }
-	}
+    }
 }
