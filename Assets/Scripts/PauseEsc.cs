@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class PauseEsc : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class PauseEsc : MonoBehaviour
     [SerializeField] Button _lowQuality;
     [SerializeField] Button _mediumQuality;
     [SerializeField] Button _highQuality;
+    [SerializeField] Slider _musicSlider;
+    [SerializeField] Slider _soundsSlider;
+
+    [SerializeField] AudioMixer _musicMixer;
+    [SerializeField] AudioMixer _soundsMixer;
 
     private GameSettings _gameSettings = GameSettings.getInstance();
 
@@ -17,6 +23,8 @@ public class PauseEsc : MonoBehaviour
         _lowQuality.onClick.AddListener(SetLowQuality);
         _mediumQuality.onClick.AddListener(SetMediumQuality);
         _highQuality.onClick.AddListener(SetHighQuality);
+        _musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        _soundsSlider.onValueChanged.AddListener(SetSoundsVolume);
     }
 
     private void OnDestroy()
@@ -25,6 +33,8 @@ public class PauseEsc : MonoBehaviour
         _lowQuality.onClick.RemoveListener(SetLowQuality);
         _mediumQuality.onClick.RemoveListener(SetMediumQuality);
         _highQuality.onClick.RemoveListener(SetHighQuality);
+        _musicSlider.onValueChanged.RemoveListener(SetMusicVolume);
+        _soundsSlider.onValueChanged.RemoveListener(SetSoundsVolume);
     }
 
     private void SetLowQuality()
@@ -40,6 +50,16 @@ public class PauseEsc : MonoBehaviour
     private void SetHighQuality()
     {
         QualitySettings.SetQualityLevel(5);
+    }
+
+    private void SetMusicVolume(float value)
+    {
+        _musicMixer.SetFloat("Volume", value);
+    }
+
+    private void SetSoundsVolume(float value)
+    {
+        _soundsMixer.SetFloat("Volume", value);
     }
 
     private void Update()

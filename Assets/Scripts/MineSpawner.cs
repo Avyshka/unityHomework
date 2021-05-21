@@ -9,11 +9,13 @@ public class MineSpawner : MonoBehaviour
 
     private GameSettings _gameSettings = GameSettings.getInstance();
     private Inventory _inventory;
+    private AudioSource _audioSource;
     private bool _isReloaded;
 
     private void Awake()
     {
         _inventory = GetComponent<Inventory>();
+        _audioSource = GetComponent<AudioSource>();
         _isReloaded = true;
     }
 
@@ -30,6 +32,7 @@ public class MineSpawner : MonoBehaviour
                 _inventory.removeAmmoMines();
                 Instantiate(_minePrefab, _mineSpawnPlace.position, _mineSpawnPlace.rotation);
                 _animator.SetTrigger("Shoot");
+                _audioSource.Play();
                 _isReloaded = false;
                 StartCoroutine(StartReloaded());
             }
